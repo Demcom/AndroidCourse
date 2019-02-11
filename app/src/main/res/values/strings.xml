@@ -4,4 +4,6 @@
     <string name="password">Password</string>
     <string name="todo">TODO</string>
     <string name="login">Login</string>
+    <string name="place_and_date">Tijuana, Baja California a 22 de Enero del 2019</string>
+    <string name="datetime">18:45</string>
 </resources>
