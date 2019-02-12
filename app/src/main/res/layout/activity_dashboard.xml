@@ -112,10 +112,17 @@
 
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
+            android:id="@+id/logoutCarView"
             android:layout_margin="15dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5">
+            <ImageView
+                android:layout_margin="15dp"
+                android:src="@drawable/logout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
 
         </android.support.v7.widget.CardView>
     </LinearLayout>

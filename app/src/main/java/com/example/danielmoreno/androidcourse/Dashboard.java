@@ -1,27 +1,34 @@
 package com.example.danielmoreno.androidcourse;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.danielmoreno.androidcourse.api.ApiManager;
 import com.example.danielmoreno.androidcourse.api.models.CurrentWeather;
+import com.example.danielmoreno.androidcourse.utils.SharedPreferencesHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity implements View.OnClickListener {
     private static final Double ABSOLUTE_ZERO = 273.15;
-    TextView textView;
+    private TextView textView;
+    private CardView cardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        cardView = findViewById(R.id.logoutCarView);
         textView = findViewById(R.id.weatherLabel);
+        cardView.setOnClickListener(this);
         ApiManager apiManager = new ApiManager();
         apiManager.getWeather(new Callback<CurrentWeather>() {
             @Override
@@ -42,7 +49,26 @@ public class Dashboard extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.logoutCarView) {
+            logoutUser();
+        }
+    }
 
+    private void logoutUser() {
+        SharedPreferencesHelper sharedPreferencesHelper = new SharedPreferencesHelper(this);
+        sharedPreferencesHelper.logoutUser();
+        goToLogin();
+    }
+
+    private void goToLogin() {
+        Intent intent = new Intent();
+        intent.setClass(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+        finish();
     }
 }

@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiManager {
 
-    public static final String BASE_URL = "https://api.openweathermap.org/";
+    private static final String BASE_URL = "https://api.openweathermap.org/";
     private WeatherApiInterface weatherApiInterface;
 
     public ApiManager() {
@@ -21,7 +21,7 @@ public class ApiManager {
     }
 
     public void getWeather(Callback<CurrentWeather> callback) {
-        Call<CurrentWeather> call = weatherApiInterface.getWeather("Hermosillo,mx", "be2d30db1bf3bc0b9068f424fbbd038");
+        Call<CurrentWeather> call = weatherApiInterface.getWeather("Tijuana,mx", "be2d30db1bf3bc0cb9068f424fbbd038");
         call.enqueue(callback);
     }
 
