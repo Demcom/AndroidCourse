@@ -21,7 +21,7 @@ public class ApiManager {
     }
 
     public void getWeather(Callback<CurrentWeather> callback) {
-        Call<CurrentWeather> call = weatherApiInterface.getWeather("Hermosillo,mx", "be2d30db1bf3bc0b9068f424fbbd038");
+        Call<CurrentWeather> call = weatherApiInterface.getWeather("Hermosillo,mx", "be2d30db1bf3bc0cb9068f424fbbd038");
         call.enqueue(callback);
     }
 
