@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.danielmoreno.androidcourse.api.ApiManager;
 import com.example.danielmoreno.androidcourse.api.models.CurrentWeather;
 import com.example.danielmoreno.androidcourse.utils.SharedPreferencesHelper;
+import com.example.danielmoreno.androidcourse.contacts.ContactsActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,16 +20,19 @@ import retrofit2.Response;
 
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
     private static final Double ABSOLUTE_ZERO = 273.15;
-    private TextView textView;
-    private CardView cardView;
+    private TextView mWeatherTextView;
+    private CardView mLogoutCardView;
+    private CardView mContactsCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        cardView = findViewById(R.id.logoutCarView);
-        textView = findViewById(R.id.weatherLabel);
-        cardView.setOnClickListener(this);
+        mLogoutCardView = findViewById(R.id.logoutCarView);
+        mWeatherTextView = findViewById(R.id.weatherLabel);
+        mLogoutCardView.setOnClickListener(this);
+        mContactsCardView = findViewById(R.id.contactsCardView);
+        mContactsCardView.setOnClickListener(this);
         ApiManager apiManager = new ApiManager();
         apiManager.getWeather(new Callback<CurrentWeather>() {
             @Override
@@ -37,7 +41,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     CurrentWeather currentWeather = response.body();
                     Double celsius = currentWeather.getMain().getTemp() - ABSOLUTE_ZERO;
                     String fullTemperature = String.format("%s%s%s", String.valueOf(celsius.intValue()), "° ", currentWeather.getWeather().get(0).getMain());
-                    textView.setText(fullTemperature);
+                    mWeatherTextView.setText(fullTemperature);
                     Log.d("RESPONSE", currentWeather.getName());
                 } else {
                     Toast.makeText(getApplicationContext(), "There was an error.", Toast.LENGTH_LONG).show();
@@ -55,6 +59,10 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         if (v.getId() == R.id.logoutCarView) {
             logoutUser();
+        } else if (v.getId() == R.id.contactsCardView) {
+            Intent intent = new Intent();
+            intent.setClass(this, ContactsActivity.class);
+            startActivity(intent);
         }
     }
 

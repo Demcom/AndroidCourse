@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void loginButtonClicked() {
+        SharedPreferencesHelper sharedPrefs = new SharedPreferencesHelper(this);
         String username = userEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         if (username.equals(this.username) && password.equals(this.password)) {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(this, "Username or password invalid", Toast.LENGTH_LONG).show();
     }
 
-    private void goToDashboard() {
+    public void goToDashboard() {
         Intent intent = new Intent();
         intent.setClass(this, Dashboard.class);
         startActivity(intent);
