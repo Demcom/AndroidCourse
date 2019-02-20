@@ -20,15 +20,17 @@ import retrofit2.Response;
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
     private static final Double ABSOLUTE_ZERO = 273.15;
     private TextView textView;
-    private CardView cardView;
+    private CardView cardView, contactView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         cardView = findViewById(R.id.logoutCarView);
+        contactView = findViewById(R.id.contactCard);
         textView = findViewById(R.id.weatherLabel);
         cardView.setOnClickListener(this);
+        contactView.setOnClickListener(this);
         ApiManager apiManager = new ApiManager();
         apiManager.getWeather(new Callback<CurrentWeather>() {
             @Override
@@ -55,6 +57,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         if (v.getId() == R.id.logoutCarView) {
             logoutUser();
+        } else if (v.getId() == R.id.contactCard) {
+            goToContacts();
         }
     }
 
@@ -71,4 +75,11 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         startActivity(intent);
         finish();
     }
+
+    private void goToContacts() {
+        Intent intent = new Intent();
+        intent.setClass(this, ContactActivity.class);
+        startActivity(intent);
+    }
+
 }
