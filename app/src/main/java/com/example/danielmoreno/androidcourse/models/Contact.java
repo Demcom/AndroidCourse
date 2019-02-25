@@ -7,6 +7,15 @@ public class Contact {
     private String mLastName;
     private String mPhoneNumber;
 
+    public Contact() { }
+
+    public Contact(String firstName, String lastName, String phoneNumber, String imageId) {
+         mFirstName = firstName;
+         mLastName = lastName;
+         mPhoneNumber = phoneNumber;
+         mImageId = imageId;
+    }
+
     public String getFirstName() {
         return mFirstName;
     }

@@ -15,15 +15,21 @@ public class ContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact);
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        showFloatingButtonForContact();
+    }
+
+    public void showFloatingButtonForContact() {
         if (getSupportFragmentManager() != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             Fragment fragment = fragmentManager.findFragmentById(R.id.fragmentContainer);
             if (fragment instanceof ContactListFragment) {
                 ContactListFragment contactListFragment = (ContactListFragment) fragment;
-                contactListFragment.showFAB(true);
+                contactListFragment.showFloatingActionButton(true);
+                contactListFragment.updateData();
             }
         }
     }

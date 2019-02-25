@@ -35,6 +35,7 @@ public class ContactsDBHelper {
         Cursor cursor = mSqlLiteDatabase.query(USER_TABLE_NAME, columns, null, null, null, null, null);
         while (cursor.moveToNext()) {
             Contact contact = new Contact();
+            String firstname = cursor.getString(cursor.getColumnIndex(FIRST_NAME_FIELD));
             contact.setFirstName(cursor.getString(cursor.getColumnIndex(FIRST_NAME_FIELD)));
             contact.setLastName(cursor.getString(cursor.getColumnIndex(LAST_NAME_FIELD)));
             contact.setPhoneNumber(cursor.getString(cursor.getColumnIndex(PHONE_NUMBER_FIELD)));
